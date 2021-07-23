@@ -14,6 +14,35 @@ class App extends Component {
     return new Intl.NumberFormat('pt-BR').format(value);
   }
 
+  setFavicon(icon) {
+
+    const favicon = document.querySelector(`head > link[rel='icon']`);
+    const svgIcon = `<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>${icon}</text></svg>`.trim();
+
+    favicon.setAttribute(`href`, `data:image/svg+xml,${svgIcon}`);
+
+  }
+
+  updateFavicon() {
+
+    const toggleTime = 2000;
+    const favicons = ['🦠', '🏥', '💉', '🧴', '😷', '💧', '🧼', '🤲'];
+    let currentFavicon = 0;
+
+    setInterval(() => {
+
+      this.setFavicon(favicons[currentFavicon]);
+
+      if (currentFavicon < favicons.length - 1) {
+        currentFavicon++;
+      } else {
+        currentFavicon = 0;
+      }
+
+    }, toggleTime);
+
+  }
+
   fetchData() {
 
     this.setState({ loading: true });
@@ -48,6 +77,8 @@ class App extends Component {
   }
 
   render() {
+
+    this.updateFavicon();
 
     return (
 
