@@ -18,9 +18,9 @@ class App extends Component {
 
     this.setState({ loading: true });
 
-    const yesterday = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
-    const today = dayjs().format('YYYY-MM-DD');
-    const endpoint = `https://api.covid19api.com/country/brazil?from=${yesterday}T00:00:00Z&to=${today}T00:00:00Z`;
+    const startDate = dayjs().subtract(2, 'day').format('YYYY-MM-DD');
+    const endDate = dayjs().subtract(1, 'day').format('YYYY-MM-DD');
+    const endpoint = `https://api.covid19api.com/country/brazil?from=${startDate}T00:00:00Z&to=${endDate}T00:00:00Z`;
 
     fetch(endpoint, { method: 'GET', redirect: 'follow' })
       .then((response) => response.json())
